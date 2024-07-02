@@ -1,12 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
-import { HomePage, ProductsList } from '../pages';
-import Checkout from '../pages/Checkout/Checkout';
-import CartCheckout from '../pages/Cart/components/CartCheckout';
-import OrderPage from '../pages/Order/OrderPage';
-import ProductDetail from '../pages/ProductDetail';
 import About from '../components/layout/About';
 import Contact from '../components/layout/Contact';
-import {PageNotFound} from "../pages/PageNotFound"
+import { HomePage, ProductsList } from '../pages';
+import CartCheckout from '../pages/Cart/components/CartCheckout';
+import Checkout from '../pages/Checkout/Checkout';
+import { Login } from '../pages/Login';
+import OrderPage from '../pages/Order/OrderPage';
+import { PageNotFound } from "../pages/PageNotFound";
+import ProductDetail from '../pages/ProductDetail';
 export const AllRoutes = () => {
   return (
     <>
@@ -18,7 +19,7 @@ export const AllRoutes = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/order" element={<OrderPage />} />
-
+        <Route path='/login' element={<Login />} />
         <Route path="/cartCheckout" element={<CartCheckout />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>

@@ -1,0 +1,44 @@
+button{
+    width: 80px;
+    padding: 10px 12px;
+    outline: none;
+    border: none;
+    font-family: Memoirs;
+    font-size: var(--fontSize-14);
+    letter-spacing: var(--letterSpacing);
+
+    &:disabled{
+        opacity: 0.7;
+    }
+
+    @mixin animate($animation-name, $animation-duration, $animation-direction, $animation-iteration-count){
+        animation : $animation-name $animation-duration $animation-direction $animation-iteration-count;
+    }
+
+    @mixin keyframes($name){
+        @keyframes #{$name}{
+            @content;		
+        }
+    }
+
+    .loadingIcon {
+        margin: auto;
+        display: block;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        border: 2px solid #000;
+        border-top: 2px solid #fff;
+        @include keyframes(loading-spinner) {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+         @include animate(loading-spinner, 1s, linear, infinite);
+
+
+}
+}

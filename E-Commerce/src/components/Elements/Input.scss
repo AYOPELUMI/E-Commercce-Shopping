@@ -1,0 +1,70 @@
+		input{
+			width: 100%;
+			border: 1px solid var(--border-color);
+			outline: none;
+			padding: 8px 14px;
+			border-radius: 4px;
+			font-size: var(--fontSize-14);
+			font-family: Memoirs;
+			letter-spacing: var(--letterSpacing-08);
+			cursor: auto;
+			z-index: 1;
+			font-weight: normal;
+			color: var(--color-default-black);
+			background: var(--itemCtnr-bg);
+
+			&:active, &:focus{
+				border:2px solid var(--header-btn-bg);
+			}
+		}
+		span{
+			cursor: pointer;
+		}
+		.placeHolder{
+			width :fit-content;
+			height : fit-content;
+			position : absolute;
+			background:  var(--itemCtnr-bg);
+			font-size: var(--fontSize-14);
+			font-family: Memoirs;
+			letter-spacing: var(--letterSpacing-025);
+			line-height: var(--lineHeight-15);
+			color: var(--theme-color);
+			opacity: var(--fontOpacity);
+			cursor: auto;
+			-webkit-transition: all .2s ease-in-out;
+			-moz-transition: all .2s ease-in-out;
+		    -ms-transition: all .2s ease-in-out;
+		     -o-transition: all .2s ease-in-out;
+		        transition: all .2s ease-in-out;
+
+
+		}
+		.errorMsg{
+			width: fit-content;
+			height: fit-content;
+			background: transparent;
+			padding: 2px;
+			color: red;
+			position: absolute;
+			top: -5px;
+			left: 50%;
+			font-size: var(--fontSize-12);
+			letter-spacing: var(--letterSpacing-025);
+			font-weight: bold;
+
+		}
+		label{
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+		}
+		.passWordIcon{
+			position: absolute;
+			left: 90%;
+			cursor: pointer;
+			transform: translateY(60%);
+			z-index: 3;
+			color: var(--theme-color);
+		}
