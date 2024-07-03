@@ -6,11 +6,11 @@ import "./Input.scss";
 export function Input (props) {
 	const{
 		type,
-		inputClassName,
+		className,
 		placeHolder,
 		checkedValueFunction,
 		required,
-		checked,
+		disabled,
 		labelFor,
 		labelClassName,
 		value,
@@ -20,9 +20,9 @@ export function Input (props) {
 		errorMsg
 	} = props
 
-	const [inputValue, setValue] = useState("")
-	const [focusBoolean, setFocusBoolean] = useState(false)
-	const [divClickBoolean, setDivClickBoolean] = useState(false)
+	// const [inputValue, setValue] = useState("")
+	// const [focusBoolean, setFocusBoolean] = useState(false)
+	// const [divClickBoolean, setDivClickBoolean] = useState(false)
 	const inputRef = useRef(null);
 	const [showPassword, setShowPassword] = useState(false)
 	
@@ -38,12 +38,12 @@ export function Input (props) {
 		}
 	}
 
-	const handleOnFocus = (e) =>{
-		setFocusBoolean(true)
-		setDivClickBoolean(true)
+	const handleOnFocus = () =>{
+		// setFocusBoolean(true)
+		// setDivClickBoolean(true)
 	}
-	const handleDivClick =(e) => {
-		setDivClickBoolean(true)
+	const handleDivClick =() => {
+		// setDivClickBoolean(true)
 		// handleclick(!divClickBoolean)
 		console.log("i passed thru here")
 		inputRef.current.focus()		
@@ -76,16 +76,16 @@ export function Input (props) {
 		console.log("i pass here")
 	}
 
-	if (!inputClassName || errorMsg || inputClassName=="error") {
+
 		style={
 			fontSize: value ? "12px" : null,
-			transform:  value ? "translateY(-50px)" : "translateY(-160%)",
+			transform:  value!= "" && value!= null && value!= undefined ? "translateY(-50px)" : "translateY(100%)",
 			zIndex : value ? "2" : "1",
 			left : value ? "-2px" :"12px",
 			opacity : value? '0' : '1',
-			color: inputClassName == "error" ? "red" : undefined
+			color: className == "error" ? "red" : undefined
 		}
-	}
+	
 
 	return(
 		<label className={labelClassName ? labelClassName : undefined} style ={{
@@ -97,30 +97,28 @@ export function Input (props) {
 				fontSize: type== "password" ? "12px" : undefined,
 				position : "static" 
 			}}>{errorMsg}</p> : null}
-			<div style={{
-				position : "relative"
-			}}>
-					<input 
-						type={showPassword ? "text" : type} 
-						required={required ? true :false }  
-						ref={inputRef} 
-						checked={checked}
-						onFocus={span ? null : handleOnFocus} 
-						className={inputClassName ? inputClassName : undefined} 
-						onChange={handleChange} 
-						value={value}
-						index={index}
-						name={span}
-						id={span}
-					/>
-					{type == "password" ? showPassword ? <HiEye className="passWordIcon"  onClick={handleShowPassword}/> : <RiEyeCloseFill onClick={handleShowPassword} className="passWordIcon"/> : null}
-					<div 
-						className="placeHolder" 
-						style={style} 
-						onClick={handleDivClick}>
-						{placeHolder}
-					</div>
-				</div>
+			<div>		
+				{placeHolder ? <div 
+					className="placeHolder" 
+					style={style} 
+					onClick={handleDivClick}>
+					{placeHolder}
+				</div> : null}
+				<input
+					type={showPassword ? "text" : type} 
+					required={required} 
+					// onBlur={span ? null : handleBlur}  
+					onFocus={handleOnFocus} 
+					className={className ? className : undefined} 
+					onChange={handleChange} 
+					value={value}
+					index={index}
+					name={span}
+					id={span}
+					disabled={disabled}
+				/>
+				{type == "password" ? showPassword ? <HiEye className="passWordIcon"  onClick={handleShowPassword}/> : <RiEyeCloseFill onClick={handleShowPassword} className="passWordIcon"/> : null}
+			</div>
 				{span ? span: null}
 		</label>
 	)
