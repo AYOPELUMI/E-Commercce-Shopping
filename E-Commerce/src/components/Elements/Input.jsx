@@ -21,7 +21,7 @@ export function Input (props) {
 	} = props
 
 	// const [inputValue, setValue] = useState("")
-	// const [focusBoolean, setFocusBoolean] = useState(false)
+	const [focusBoolean, setFocusBoolean] = useState(false)
 	// const [divClickBoolean, setDivClickBoolean] = useState(false)
 	const inputRef = useRef(null);
 	const [showPassword, setShowPassword] = useState(false)
@@ -39,7 +39,7 @@ export function Input (props) {
 	}
 
 	const handleOnFocus = () =>{
-		// setFocusBoolean(true)
+		setFocusBoolean(true)
 		// setDivClickBoolean(true)
 	}
 	const handleDivClick =() => {
@@ -88,10 +88,7 @@ export function Input (props) {
 	
 
 	return(
-		<label className={labelClassName ? labelClassName : undefined} style ={{
-			flexDirection : span ? "row" : undefined,
-			cursor : span ? "pointer" : undefined
-		}}>
+		<label className={labelClassName ? labelClassName : undefined}>
 			{labelFor}
 			{errorMsg ? <p className="errorMsg" style={{
 				fontSize: type== "password" ? "12px" : undefined,
@@ -99,8 +96,7 @@ export function Input (props) {
 			}}>{errorMsg}</p> : null}
 			<div>		
 				{placeHolder ? <div 
-					className="placeHolder" 
-					style={style} 
+					className={  value!= "" && value!= null && value!= undefined && focusBoolean == true ? "placeHolder placeHolderactive" :"placeHolderinactive placeHolder"}
 					onClick={handleDivClick}>
 					{placeHolder}
 				</div> : null}
