@@ -8,7 +8,7 @@ const PWD_REGEX =
     /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%*&_-])[A-Za-z\d!@#$%*&_-]{8,24}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 export const Signup = () => {
-    const [loginDetails, setLoginDetails] = useState({firstname:"",password:""});
+    const [loginDetails, setLoginDetails] = useState({firstname:"",lastname:"",email:"",password:""});
     const [ErrorMsg, setErrorMsg] = useState("")
     console.log({loginDetails})
     function handleFirstNameChange (args){
@@ -42,20 +42,21 @@ export const Signup = () => {
 
     }
     const handleSubmit = () =>{
-        if(/^$/.test(setLoginDetails.firstname)){
+        if(/^$/.test(loginDetails.firstname)){
+            console.log("i am here")
             setErrorMsg("fill your first name")
-            return
+            return;
         }
-        if(loginDetails.lastname.lemgth > 0 && loginDetails.lastname !=""){
+        if(/^$/.test(loginDetails.lastname)){
             setErrorMsg("fill your last name")
-            return
+            return;
+        }
+        if(!EMAIL_REGEX.test(loginDetails.email)){
+          setErrorMsg("invalid email address")
+          return;
         }
       if (!(PWD_REGEX.test(loginDetails. password))) {
         setErrorMsg("Password must contain Alphanumeric and special characters")
-        return;
-      }
-      if(!EMAIL_REGEX.test(loginDetails.email)){
-        setErrorMsg("invalid email address")
         return;
       }
 
@@ -71,7 +72,7 @@ export const Signup = () => {
             <div><h3 className='font-bold text-[30px]/[43px] text-[#131118]'>Create New Account</h3>
             <p className='font-normal text-[#A4A1A1] text-sm/[23px] mb-8 mt-1'>Please enter details</p>
             </div>
-            {ErrorMsg ? <p className="text-sm p-1 text-custom-red bg-rose-800 border border-rose-500">{ErrorMsg}</p> : null}
+            {ErrorMsg ? <p className=" w-fit text-sm p-1 text-custom-red bg-rose-800 border border-rose-500">{ErrorMsg}</p> : null}
             <Input
               labelFor="First Name"
               type='text'
