@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { LoginSVG } from "../assets/SVG/LoginSVG";
-import { Button } from "../components/Elements/Button/Button";
-import { Input } from "../components/Elements/Input";
+import { LoginSVG } from "../../../assets/SVG/LoginSVG";
+import { Button } from "../../../components/Elements/Button/Button";
+import { Input } from "../../../components/Elements/Input";
 export const Login = () => {
 
   const [loginDetails, setLoginDetails] = useState({username:"",password:""});
@@ -21,12 +21,12 @@ export const Login = () => {
   }
 
   return (
-    <div className='w-screen h-screen flex bg-white'>
+    <div className='w-screen h-screen flex flex-col md:flex-row bg-white xl:items-center'>
       <aside className="flex-1 overflow-hidden">
         <LoginSVG />
       </aside>
-      <aside className="flex-1 flex items-center justify-center">
-        <form className='w-full px-20 flex flex-col gap-7'>
+      <aside className="flex-1 flex items-center px-8 lg:px-16">
+        <form className='w-full md:min-w-[500px] lg:max-w-[1000px] flex flex-col gap-7'>
           <h3 className='font-bold text-[30px]/[43px] text-[#131118]'>Welcome {String.fromCodePoint('0x1F44B')}</h3>
           <p className='font-normal text-[#A4A1A1] text-sm/[23px] mb-6'>Please login here</p>
           <Input

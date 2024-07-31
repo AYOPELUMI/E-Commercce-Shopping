@@ -2,9 +2,10 @@ import { Route, Routes } from 'react-router-dom';
 import About from '../components/layout/About';
 import Contact from '../components/layout/Contact';
 import { HomePage, ProductsList } from '../pages';
+import { Login } from '../pages/Auth/Login/Login';
+import { Signup } from '../pages/Auth/Signup/Signup';
 import CartCheckout from '../pages/Cart/components/CartCheckout';
 import Checkout from '../pages/Checkout/Checkout';
-import { Login } from '../pages/Login';
 import OrderPage from '../pages/Order/OrderPage';
 import { PageNotFound } from "../pages/PageNotFound";
 import ProductDetail from '../pages/ProductDetail';
@@ -20,6 +21,8 @@ export const AllRoutes = () => {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/order" element={<OrderPage />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Signup />} />
+
         <Route path="/cartCheckout" element={<CartCheckout />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
