@@ -64,11 +64,11 @@ export const Signup = () => {
   
     return (
       <div className='w-screen h-screen flex flex-col md:flex-row bg-white'>
-        <aside className="flex-1 max-w-[845px] xl:max-w-full overflow-hidden relative">
+        <aside className="flex-1 max-w-[845px] overflow-hidden relative">
             <img src={image} className='absolute top-0 left-0 w-full  h-[1024px] xl:h-full' alt="signup imge" />
         </aside>
-        <aside className="flex-1 flex items-center px-8 xl:px-20 xl:justify-center">
-          <form onSubmit={handleSubmit} className=' bg-amber-900 w-full flex flex-col gap-4 max-w-[840px]'>
+        <aside className="flex-1 flex items-center px-8 xl:px-20 2xl:justify-center">
+          <form onSubmit={handleSubmit} className=' bg-amber-900 w-full flex flex-col gap-4 lg:max-w-[600px] 2xl:max-w-[960px]'>
             <div><h3 className='font-bold text-[30px]/[43px] text-[#131118]'>Create New Account</h3>
             <p className='font-normal text-[#A4A1A1] text-sm/[23px] mb-8 mt-1'>Please enter details</p>
             </div>
