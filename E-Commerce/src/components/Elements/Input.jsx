@@ -95,11 +95,6 @@ export function Input (props) {
 				position : "static" 
 			}}>{errorMsg}</p> : null}
 			<div>		
-				{placeHolder ? <div 
-					className={  value!= "" && value!= null && value!= undefined && focusBoolean == true ? "placeHolder placeHolderactive" :"placeHolderinactive placeHolder"}
-					onClick={handleDivClick}>
-					{placeHolder}
-				</div> : null}
 				<input
 					type={showPassword ? "text" : type} 
 					required={required} 
@@ -112,6 +107,7 @@ export function Input (props) {
 					name={span}
 					id={span}
 					disabled={disabled}
+					placeholder = {placeHolder}
 				/>
 				{type == "password" ? showPassword ? <HiEye className="passWordIcon"  onClick={handleShowPassword}/> : <RiEyeCloseFill onClick={handleShowPassword} className="passWordIcon"/> : null}
 			</div>
