@@ -21,13 +21,14 @@ export const Login = () => {
   }
 
   function handlePasswordChange (args){
-    e.preventDefault()
+    
     setLoginDetails({
       ...loginDetails,
       password: args
     })
   }
   const handleSubmit = () =>{
+    event.preventDefault()
     if(/^$/.test(loginDetails.username)){
         console.log("i am here")
         toast.error("enter your username")
@@ -39,10 +40,11 @@ export const Login = () => {
     }
 
   axios.post("https://fakestoreapi.com/auth/login",{
-    body:{
-      "username": loginDetails.username,
-      "password" : loginDetails.password,
-  }}).then(response =>{
+    body:JSON.stringify({
+      username: loginDetails.username,
+      password : loginDetails.password,
+    })
+  }).then(response =>{
     toast.success("log in successfully")
     console.log({response})
   })
@@ -55,14 +57,14 @@ export const Login = () => {
         <LoginSVG />
       </aside>
       <aside className="flex-1 flex items-center px-8 xl:px-20 2xl:justify-center">
-        <form onSubmit={handleSubmit} className='bg-amber-900 w-full flex flex-col gap-4 lg:max-w-[500px] 2xl:max-w-[660px]'>
+        <form className='bg-amber-900 w-full flex flex-col gap-4 lg:max-w-[500px] 2xl:max-w-[660px]'>
           <h3 className='font-bold text-[30px]/[43px] text-[#131118]'>Welcome {String.fromCodePoint('0x1F44B')}</h3>
           <p className='font-normal text-[#A4A1A1] text-sm/[23px] mb-8 mt-1'>Please login here</p>
           <Toaster />
           <Input
-            labelFor="Email Address"
-            type='email'
-            placeHolder="Email Address" 
+            labelFor="Username"
+            type='text'
+            placeHolder="username" 
             updateState={handleUserNameChange}
             value={loginDetails.username}
             className={className}
@@ -78,7 +80,8 @@ export const Login = () => {
 
           <Button 
           displayWord='Login'
-          type='submit'
+          type='button'
+          onClick={handleSubmit}
           className="bg-custom-text-black text-white p-4 rounded-lg"
          />
         </form>
