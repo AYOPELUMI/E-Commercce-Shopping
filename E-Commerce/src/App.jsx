@@ -1,12 +1,14 @@
+import { QueryClient, QueryClientProvider } from 'react-query';
 import './App.css';
 import './index.css';
 import { CartProvider } from './pages/Cart/Context/CartContext';
 import { AllRoutes } from './routes/Allroutes';
 
+const queryClient = new QueryClient()
 
 function App() {
   return (
-    <div>
+    <QueryClientProvider client={queryClient}>
       <CartProvider>
         {/* <Header /> */}
         <AllRoutes />
@@ -15,7 +17,7 @@ function App() {
         {/* <Footer /> */}
       </CartProvider>
 
-    </div>
+    </QueryClientProvider>
   );
 }
 
