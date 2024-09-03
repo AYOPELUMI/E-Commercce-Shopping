@@ -1,18 +1,11 @@
-import { useContext, useState } from "react";
-import { CartContext } from "../Context/CartContext";
-import EmptyCart from "./EmptyCart";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import {numberFormat} from '../../../components/Elements/numberFormat.js'
+import { numberFormat } from '../../../components/Elements/numberFormat.js';
+import { useCartStore } from "../Context/CartContext.jsx";
+import EmptyCart from "./EmptyCart";
 
 const CartCheckout = () => {
-    const {
-        cartList,
-        addToCartList,
-        removeFromCartList,
-        setQuantityToCartItem,
-        removeItemFromCartList,
-        getCartTotal,
-    } = useContext(CartContext);
+    const { cart, addToCart, removeFromCart, clearCart, getTotalPrice, reduceItemQuantity } = useCartStore();
 
     const [coupon, setCoupon] = useState('');
     const [discount, setDiscount] = useState(0);
@@ -27,7 +20,7 @@ const CartCheckout = () => {
 
     return (
         <>
-            {cartList.length === 0 ? (
+            {cart.length === 0 ? (
                 <EmptyCart />
             ) : (
                 <main className="p-10 ">
@@ -44,7 +37,7 @@ const CartCheckout = () => {
                                 <li className=" w-1/4 font-bold "></li>
                             </ul>
                             <div className="flex flex-col-reverse">
-                                {cartList.map((item) => (
+                                {cart.map((item) => (
                                     <ul
                                         className="border-b py-5 flex   items-center gap-10"
                                         key={item.id}
@@ -64,7 +57,7 @@ const CartCheckout = () => {
                                             <div className="border flex items-center gap-1 rounded-lg   border-gray-500 p-2  ">
                                                 <span
                                                     onClick={() =>
-                                                        removeFromCartList(item)
+                                                        removeFromCart(item)
                                                     }
                                                     className="px-2 text-lg cursor-pointer "
                                                 >
@@ -76,7 +69,7 @@ const CartCheckout = () => {
 
                                                 <span
                                                     onClick={() =>
-                                                        addToCartList(item)
+                                                        addToCart(item)
                                                     }
                                                     className="px-2 text-lg cursor-pointer  "
                                                 >
@@ -91,7 +84,7 @@ const CartCheckout = () => {
                                         <li
                                             className=" w-1/4  cursor-pointer"
                                             onClick={() =>
-                                                removeItemFromCartList(item)
+                                                reduceItemQuantity(item)
                                             }
                                         >
                                             {
@@ -128,7 +121,7 @@ const CartCheckout = () => {
                         <div className="border w-1/2 h-fit p-6">
                             <div className="flex justify-between mb-5 font-bold">
                                 <h3>Subtotal</h3>
-                                <h3> ${getCartTotal()}</h3>
+                                <h3> ${getTotalPrice()}</h3>
                             </div>
                             <div className="py-4 border-y grid gap-1">
                                 <small>Enter Coupon Code</small>
@@ -158,7 +151,7 @@ const CartCheckout = () => {
 
                             <div className="flex justify-between mt-6 font-bold">
                                 <h3>Grand Total</h3>
-                                <h3>${(getCartTotal() + 5 - discount).toFixed(2)}</h3>
+                                <h3>${(getTotalPrice() + 5 - discount).toFixed(2)}</h3>
                             </div>
 
                             <div className="grid mt-6">

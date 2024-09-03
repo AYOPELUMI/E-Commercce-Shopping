@@ -1,11 +1,9 @@
-/* eslint-disable react/prop-types */
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { CartContext } from "../../Cart/Context/CartContext.jsx";
+import { useCartStore } from '../../Cart/Context/CartContext';
 
 export function ProductCard(props) {
     const navigate = useNavigate();
-    const { addToCartList } = useContext(CartContext);
+    const addToCart = useCartStore((state) => state.addToCart);
 
     const itemSelectedHandler = () => {
         navigate(`/products/${props.id}`);
@@ -13,7 +11,7 @@ export function ProductCard(props) {
 
     const handleAddToCart = () => {
         //add to the cart dunction is called
-        addToCartList({
+        addToCart({
             id: props.id,
             name: props.name,
             price: props.price,

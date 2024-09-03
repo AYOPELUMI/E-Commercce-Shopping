@@ -1,11 +1,10 @@
 import axios from 'axios';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { CartContext } from './Cart/Context/CartContext';
-
+import { useCartStore } from './Cart/Context/CartContext';
 const ProductDetail = () => {
   const { id } = useParams();
-  const { addToCartList } = useContext(CartContext);
+  const { addToCart } = useCartStore();
   const [activeTab, setActiveTab] = useState('description');
   const [product, setProduct] = useState({
     id: 0,
@@ -29,7 +28,7 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     //add to the cart dunction is called
-    addToCartList({
+    addToCart({
       id: product.id,
       name: product.name,
       price: product.price,

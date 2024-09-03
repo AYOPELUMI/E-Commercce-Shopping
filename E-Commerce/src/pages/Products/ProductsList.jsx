@@ -5,10 +5,10 @@ import { ProductCard } from './components.js/ProductCard';
 
 export const ProductsList = () => {
   // const baseUrl = 'https://paschal.pythonanywhere.com/api/v1/';
-  const baseUrl = "https://fakestoreapi.com";
+  const baseUrl = "https://api.escuelajs.co/api/v1/products";
 
   const{isLoading, data} = useQuery("products",()=>{
-    return axios.get(`${baseUrl}/products`)
+    return axios.get(baseUrl)
   })
   // useEffect(() => {
   //   axios

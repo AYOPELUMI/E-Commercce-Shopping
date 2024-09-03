@@ -1,19 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
+import { FaRegCreditCard, FaRegRectangleList } from "react-icons/fa6";
+import { RiHome7Line } from "react-icons/ri";
 import { useLocation } from "react-router-dom";
+import { useCartStore } from "../Cart/Context/CartContext.jsx";
 import Address from "./components/Address";
-import OrderReview from "./components/OrderReview";
-import PaymentMethod from "./components/PaymentMethod";
 import CheckoutModal from "./components/CheckoutModal";
 import CheckoutSuccess from "./components/CheckoutSuccess";
-import CheckoutFailure from "./components/CheckoutFailure";
-import { RiHome7Line } from "react-icons/ri";
-import { FaRegCreditCard, FaRegRectangleList } from "react-icons/fa6";
-import { CartContext } from "../Cart/Context/CartContext";
+import OrderReview from "./components/OrderReview";
+import PaymentMethod from "./components/PaymentMethod";
 
 const Checkout = () => {
     const {state} = useLocation();
     const [step, setStep] = useState(1);
-    const {cartList, getCartTotal} = useContext(CartContext);
+    const {cart, getTotalPrice} = useCartStore();
     const [isAddressSubmited, setIsAddressSubmited] = useState(false);
     const [isPaymentSubmited, setIsPaymentSubmited] = useState(false);
     const [isSubmittingOrder, setIsSubmittingOrder] = useState(false);
@@ -210,7 +209,7 @@ const Checkout = () => {
                                     paymentInfo={paymentFormData}
                                     step={step}
                                     setStep={setStep}
-                                    cartList={cartList}
+                                    cartList={cart}
                                 />
                             )}
                         </div>
@@ -240,7 +239,7 @@ const Checkout = () => {
                 <div className="order-summary flex flex-col w-38 gap-4 p-4 border border-gray-200">
                     <div className="flex justify-between pb-2 border-b">
                         <h1 className="font-bold">Subtotal</h1>
-                        <h1 className="font-bold">{`$${getCartTotal()}`}</h1>
+                        <h1 className="font-bold">{`$${getTotalPrice()}`}</h1>
                     </div>
 
                     <div className="flex flex-col gap-1">
@@ -272,7 +271,7 @@ const Checkout = () => {
 
                     <div className="flex justify-between pt-2 border-t">
                         <h1 className="font-bold">Grand Total</h1>
-                        <h1 className="font-bold">{`$${(getCartTotal() + deliveryCharge - discount).toFixed(2)}`}</h1>
+                        <h1 className="font-bold">{`$${(getTotalPrice() + deliveryCharge - discount).toFixed(2)}`}</h1>
                     </div>
 
                     {step === 3 && (

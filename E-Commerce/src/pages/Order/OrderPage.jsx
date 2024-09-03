@@ -1,20 +1,20 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import OrderCard from "./components/OrderCard";
 // import { orders } from "./data";
-import { CartContext } from "../Cart/Context/CartContext";
+import { useCartStore } from "../Cart/Context/CartContext.jsx";
+
 
 const OrderPage = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
-    const { cartList, getCartTotal, clearCartList } = useContext(CartContext);
+    const { cart, getTotalPrice, clearCart } = useCartStore();
 
     const { addressData, paymentData, deliveryCharge, discount } = state;
 
     const continueShoppingHandler = (e) => {
         e.preventDefault();
 
-        clearCartList();
+        clearCart();
         localStorage.removeItem('cartList');
         navigate('/');
     };
@@ -189,7 +189,7 @@ const OrderPage = () => {
                     </thead>
 
                     <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                        {cartList.map((order) => (
+                        {cart.map((order) => (
                             <tr key={order.id}>
                                 <td className="p-2  font-medium whitespace-nowrap">
                                     <img
@@ -237,7 +237,7 @@ const OrderPage = () => {
                             </td>
                             <td className=""></td>
                             <td className="py-3  font-bold whitespace-nowrap">{`$${
-                                getCartTotal() + deliveryCharge - discount
+                                getTotalPrice() + deliveryCharge - discount
                             }`}</td>
                         </tr>
                     </tbody>
