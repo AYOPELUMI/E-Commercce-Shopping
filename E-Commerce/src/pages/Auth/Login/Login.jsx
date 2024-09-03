@@ -36,7 +36,7 @@ export const Login = () => {
     onSuccess: (response) => {
       const data = response.data;
       console.log({ data });
-      if (data && data.user) {
+      if (data) {
         queryClient.setQueryData(['token'], data);
         toast.success("Login successful");
       } else {
