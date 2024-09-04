@@ -1,15 +1,23 @@
 import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useAuthStore } from './pages/Auth/Login/LoginStore';
+import { useRefreshToken } from './pages/RefreshTken';
 
 export const Layout = () => {
-    const  accessToken  = useAuthStore((state) => state.accessToken );
-    console.log(accessToken)
+    const { data: token, isLoading, error } = useRefreshToken();
+    
     const { pathname } = useLocation();
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+      }
+    
+      if (error) {
+        return <div>Error: {error.message}</div>;
+      }
     return (
         <div>
             {
-                accessToken ?
+                token ?
                 <Outlet />
                 :    
                 <Navigate
