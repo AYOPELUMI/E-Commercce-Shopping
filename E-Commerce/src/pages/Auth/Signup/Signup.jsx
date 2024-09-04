@@ -23,27 +23,27 @@ export const Signup = () => {
 
   const [ErrorMsg, setErrorMsg] = useState("");
 
-  const handleFirstNameChange = (args) => {
-    setLoginDetails({ ...loginDetails, firstname: args });
+  const handleFirstNameChange = (event) => {
+    setLoginDetails({ ...loginDetails, firstname: event.target.value });
     setErrorMsg("");
   };
 
-  const handleLastNameChange = (args) => {
-    setLoginDetails({ ...loginDetails, lastname: args });
+  const handleLastNameChange = (event) => {
+    setLoginDetails({ ...loginDetails, lastname: event.target.value });
     setErrorMsg("");
   };
 
-  const handleUserNameChange = (args) => {
-    setLoginDetails({ ...loginDetails, username: args });
+  const handleUserNameChange = (event) => {
+    setLoginDetails({ ...loginDetails, username: event.target.value });
   };
 
-  const handleEmailChange = (args) => {
-    setLoginDetails({ ...loginDetails, email: args });
+  const handleEmailChange = (event) => {
+    setLoginDetails({ ...loginDetails, email: event.target.value });
     setErrorMsg("");
   };
 
-  const handlePasswordChange = (args) => {
-    setLoginDetails({ ...loginDetails, password: args });
+  const handlePasswordChange = (event) => {
+    setLoginDetails({ ...loginDetails, password: event.target.value });
     setErrorMsg("");
   };
 

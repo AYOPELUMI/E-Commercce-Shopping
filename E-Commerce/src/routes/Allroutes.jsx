@@ -1,6 +1,10 @@
-import { Route, Routes } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider
+} from "react-router-dom";
 import About from '../components/layout/About';
 import Contact from '../components/layout/Contact';
+import { Layout } from "../layout";
 import { HomePage, ProductsList } from '../pages';
 import { Login } from '../pages/Auth/Login/Login';
 import { Signup } from '../pages/Auth/Signup/Signup';
@@ -9,25 +13,62 @@ import Checkout from '../pages/Checkout/Checkout';
 import OrderPage from '../pages/Order/OrderPage';
 import { PageNotFound } from "../pages/PageNotFound";
 import ProductDetail from '../pages/ProductDetail';
-export const AllRoutes = () => {
-  return (
-    <>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/products" element={<ProductsList />} />
-        <Route path="/products/:id" element={<ProductDetail />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/order" element={<OrderPage />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Signup />} />
 
-        <Route path="/cartCheckout" element={<CartCheckout />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-    </>
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children:[
+      {
+        index: true,
+        element: <HomePage />
+      },
+      {
+        path:"/products",
+        element:<ProductsList />
+      },
+      {
+        path: "/products/:id",
+        element: <ProductDetail />
+      },
+      {
+        path:"/about",
+        element: <About />
+      },
+      {
+        path:"contact",
+        element: <Contact />
+      },
+      {
+        path: "checkout",
+        element: <Checkout />
+      },
+      {
+        path:"/order",
+        element: <OrderPage />
+      },
+      {
+        path:"carrtCheckout",
+        element: <CartCheckout />
+      }
+    ]
+  },
+  {
+    path:"*",
+    element: <PageNotFound />
+  },
+  {
+    path:"/login",
+    element: <Login />
+  },
+  {
+    path:"/register",
+    element: <Signup />
+  }
+])
+export const AllRoutes = () => {
+
+  return (
+      <RouterProvider router={router} />
   );
 };
-
-export default AllRoutes;

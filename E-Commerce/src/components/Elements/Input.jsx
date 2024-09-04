@@ -17,7 +17,8 @@ export function Input (props) {
 		updateState,
 		index,
 		span,
-		errorMsg
+		errorMsg,
+		name
 	} = props
 
 	// const [inputValue, setValue] = useState("")
@@ -101,10 +102,10 @@ export function Input (props) {
 					// onBlur={span ? null : handleBlur}  
 					onFocus={handleOnFocus} 
 					className={className ? className : undefined} 
-					onChange={handleChange} 
+					onChange={updateState} 
 					value={value}
 					index={index}
-					name={span}
+					name={name}
 					id={span}
 					disabled={disabled}
 					placeholder = {placeHolder}
